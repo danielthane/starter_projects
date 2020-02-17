@@ -1,0 +1,42 @@
+import random
+
+run_game = True
+print("Welcome to the number guessing game")
+print("I am going to think of a number between 1 and 100...")
+print("And all you have to do is guess it, with some help of course!")
+start = input("So, you would you like to start? (y/n)").lower
+user_guess = 101
+if start == "n":
+    run_game = False
+    print("No problem, come again soon!!")
+
+while run_game:
+    cpu_num = random.randint(0, 100)
+    user_guesses = 1
+    print("Great, I'm thinking of number...")
+    print("...")
+    print(cpu_num)
+    user_guess = int(input("Please enter a guess: "))
+    while user_guess != cpu_num:
+        if abs(user_guess - cpu_num) >= 10:
+            user_guesses += 1
+            print("Absolutely miles away, try again")
+            user_guess = int(input("Please enter a guess: "))
+        if 10 > abs(user_guess - cpu_num) >= 5:
+            user_guesses += 1
+            print("Getting warmer...")
+            user_guess = int(input("Please enter a guess: "))
+        if 5 > abs(user_guess - cpu_num) > 0:
+            user_guesses += 1
+            print("You're boiling hot!!")
+            user_guess = int(input("Please enter a guess: "))
+        if user_guess == cpu_num:
+            print("Congratulations!!!")
+            print("You guessed the number " + str(cpu_num) + "!")
+            print("The number of attempts it took you was: " + str(user_guesses))
+            replay = input("Would you like to play again (y/n):").lower
+            if replay == "y":
+                run_game = True
+            else:
+                print("Thanks for playing!")
+                run_game = False
